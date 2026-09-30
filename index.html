@@ -88,7 +88,7 @@
   .masthead nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--blue);transition:right .25s var(--ease)}
   .masthead nav a:hover{color:#fff}
   .masthead nav a:hover::after{right:0}
-  @media (max-width:560px){.masthead nav a:nth-child(1),.masthead nav a:nth-child(4){display:none}}
+  @media (max-width:560px){.masthead nav a:nth-child(1){display:none}}
 
   /* hero */
   .hero{position:relative;overflow:hidden;background:var(--navy-deep);padding-block:clamp(2.5rem,7vw,5rem) clamp(2.5rem,6vw,4rem)}
@@ -392,7 +392,6 @@
       <a href="#offers">Pricing</a>
       <a href="#cases">Case studies</a>
       <a href="#about">About</a>
-      <a href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
       <a href="#faq">FAQ</a>
       <a href="#book">Book a call</a>
     </nav>
@@ -459,8 +458,7 @@
       <img class="intro-avatar" src="grace.jpg" srcset="grace.jpg 640w, grace@2x.jpg 1280w" sizes="52px" width="104" height="104" loading="lazy" decoding="async" alt="Grace Ene">
       <p class="intro-text"><b>Grace Ene</b> spent 8 years in customer success and revenue operations. She builds every system on this site herself.</p>
       <div class="intro-links">
-        <a class="btn-quiet" href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
-        <a class="btn-quiet" href="https://github.com/nonistack" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn-quiet" href="https://github.com/grace-ene" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
   </section>
@@ -933,7 +931,7 @@
       "image":"https://prudie.dev/grace@2x.jpg",
       "worksFor":{"@id":"https://prudie.dev/#business"},
       "knowsAbout":["n8n","workflow automation","lead routing","revenue operations","CRM integration"],
-      "sameAs":["https://github.com/nonistack"]
+      "sameAs":["https://github.com/grace-ene"]
     },
     {
       "@type":"FAQPage",

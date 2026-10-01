@@ -302,15 +302,16 @@
   .offer li:first-child{border-top:0}
   .offer .btn,.offer .btn-quiet{margin-top:auto;align-self:center;font-size:.8125rem;padding:0.6rem 1.1rem}
 
-  /* testimonials (unused until real quotes exist) */
+  /* testimonials */
   .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
   @media (max-width:820px){.quotes{grid-template-columns:1fr}}
-  .quote{background:var(--paper-lift);border:1px solid var(--rule);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:1.6rem}
-  .stars{color:#B5822A;font-family:Archivo;font-size:.9rem;letter-spacing:.12em}
-  .stars span{color:var(--ink-soft);letter-spacing:0;margin-left:.4rem;font-size:.8125rem}
-  .quote blockquote{margin:.9rem 0 1.1rem;font-size:0.9375rem}
-  .quote cite{font-style:normal;font-family:Archivo;font-size:0.8125rem;color:var(--ink-soft);display:block;line-height:1.5}
-  .quote cite b{display:block;color:var(--ink);font-weight:500}
+  .quote{background:var(--paper-lift);border:1px solid var(--rule);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:1.6rem;display:flex;flex-direction:column}
+  .quote-head{display:flex;align-items:center;gap:.85rem;margin-bottom:1.1rem}
+  .quote-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Archivo;font-weight:600;font-size:.8125rem;color:#fff;flex:none}
+  .quote-byline b{display:block;font-family:Archivo;font-weight:600;font-size:.875rem;color:var(--ink);letter-spacing:-0.01em}
+  .quote-byline span{display:block;font-family:Archivo;font-size:.75rem;color:var(--ink-soft);margin-top:.1rem}
+  .quote-headline{font-family:Archivo;font-weight:600;font-size:.9375rem;color:var(--ink);margin:0 0 .75rem;letter-spacing:-0.01em}
+  .quote blockquote{margin:0;font-size:0.9375rem;color:var(--ink-soft)}
 
   /* about */
   .about{display:grid;grid-template-columns:300px 1fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
@@ -456,7 +457,7 @@
   <section class="intro-strip wrap reveal" aria-label="About Grace Ene">
     <div class="intro-strip-inner">
       <img class="intro-avatar" src="grace.jpg" srcset="grace.jpg 640w, grace@2x.jpg 1280w" sizes="52px" width="104" height="104" loading="lazy" decoding="async" alt="Grace Ene">
-      <p class="intro-text"><b>Grace Ene</b> spent 8 years in customer success and revenue operations. She builds every system on this site herself.</p>
+      <p class="intro-text"><b>Grace Ene:</b> I spent 8 years in customer success and revenue operations. I build every system on this site myself.</p>
       <div class="intro-links">
         <a class="btn-quiet" href="https://github.com/grace-ene" target="_blank" rel="noopener">GitHub</a>
       </div>
@@ -714,28 +715,38 @@
    </div>
   </section>
 
-  <!--
-    TESTIMONIALS GO HERE once you have real quotes from real clients.
-    The .quotes / .quote / .stars CSS is still in the stylesheet above,
-    so the markup is:
-
-    <section id="reviews" class="wrap reveal">
-      <div class="sec-head">
-        <h2>What clients say</h2>
-        <p>Every quote here comes from a finished project.</p>
-      </div>
-      <div class="quotes">
-        <article class="quote">
-          <div class="stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733; <span>5.0</span></div>
-          <blockquote>Their words, lightly trimmed, never rewritten.</blockquote>
-          <cite><b>First name L.</b>Their real title, company size and industry</cite>
-        </article>
-      </div>
-    </section>
-
-    Add it back right after Pricing, before FAQ. Get written permission for
-    the quote and the attribution before it goes live.
-  -->
+  <section id="reviews" class="wrap reveal">
+    <div class="sec-head">
+      <h2>What clients say</h2>
+      <p>Every quote here comes from a finished project.</p>
+    </div>
+    <div class="quotes">
+      <article class="quote">
+        <div class="quote-head">
+          <span class="quote-avatar" style="background:var(--teal)" aria-hidden="true">LF</span>
+          <div class="quote-byline"><b>Lilyanna Forteworth</b><span>LP Reporting</span></div>
+        </div>
+        <p class="quote-headline">A personal assistant that catches what I miss</p>
+        <blockquote>Grace built me a personal AI assistant that actually watches my patterns. It notices when I'm stalling on a task and nudges me, sends my receipts straight to my accountant, and drafts birthday messages for friends before I forget. It runs quietly on n8n in the background. Working with Grace was simple: she explained everything clearly and had it running in days.</blockquote>
+      </article>
+      <article class="quote">
+        <div class="quote-head">
+          <span class="quote-avatar" style="background:var(--blue)" aria-hidden="true">MR</span>
+          <div class="quote-byline"><b>Melinda Radley</b><span>Real Estate Agent</span></div>
+        </div>
+        <p class="quote-headline">10 hours a week, back in my schedule</p>
+        <blockquote>Before, I was manually following up with every open house lead, replying to cold emails one by one, and sending application packets by hand. Grace automated all 3 on n8n, synced with my CRM, so new leads get a response right away. I got 10 hours back every week, and the price was fixed from the start.</blockquote>
+      </article>
+      <article class="quote">
+        <div class="quote-head">
+          <span class="quote-avatar" style="background:var(--violet)" aria-hidden="true">CJ</span>
+          <div class="quote-byline"><b>Charles Jones</b><span>Senior Director, Multifamily Housing Finance</span></div>
+        </div>
+        <p class="quote-headline">Loan responses: hours to minutes</p>
+        <blockquote>Our loan and application responses went from hours to minutes, and doc-chasing follow-ups dropped by 25% to 40%. Rent roll and T12 intake now saves my analysts 2 to 4 hours a deal, and they still review every number. Stalled files get flagged within 1 to 2 days instead of the weekly pipeline review, and we catch compliance dates we used to miss. It runs on n8n, fixed price, and keeps running without her in the loop.</blockquote>
+      </article>
+    </div>
+  </section>
 
   <section id="faq" class="wrap reveal">
     <div class="sec-head">

@@ -80,7 +80,7 @@
   .site-header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background-image:var(--gradient);opacity:0;transition:opacity .3s var(--ease)}
   .site-header.is-scrolled{box-shadow:0 8px 24px -12px rgba(0,0,0,.5)}
   .site-header.is-scrolled::after{opacity:1}
-  .masthead{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-block:1.5rem}
+  .masthead{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-block:1.5rem;position:relative}
   .mark{font-family:Archivo;font-weight:600;font-size:1.0625rem;letter-spacing:-0.02em;text-decoration:none;color:#fff}
   .mark span{color:#fff}
   .masthead nav{font-family:Archivo;font-size:0.9375rem;display:flex;gap:1.5rem}
@@ -88,7 +88,20 @@
   .masthead nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--blue);transition:right .25s var(--ease)}
   .masthead nav a:hover{color:#fff}
   .masthead nav a:hover::after{right:0}
-  @media (max-width:560px){.masthead nav a:nth-child(1){display:none}}
+  .nav-toggle{display:none;align-items:center;justify-content:center;width:40px;height:40px;margin:-0.5rem;background:none;border:0;padding:0;color:#fff;cursor:pointer;align-self:center}
+  .nav-toggle svg{width:22px;height:22px;stroke:currentColor}
+  @media (max-width:640px){
+    .nav-toggle{display:inline-flex}
+    .masthead nav{
+      display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;
+      background:var(--navy-deep);padding:.25rem var(--gutter) 1rem;
+      border-top:1px solid rgba(255,255,255,.12);box-shadow:0 20px 36px -18px rgba(0,0,0,.6);
+    }
+    .masthead.is-nav-open nav{display:flex}
+    .masthead nav a{padding:.9rem 0;border-top:1px solid rgba(255,255,255,.1)}
+    .masthead nav a:first-child{border-top:0}
+    .masthead nav a:hover::after{display:none}
+  }
 
   /* hero */
   .hero{position:relative;overflow:hidden;background:var(--navy-deep);padding-block:clamp(2.5rem,7vw,5rem) clamp(2.5rem,6vw,4rem)}
@@ -389,13 +402,16 @@
 <header class="site-header">
   <div class="wrap masthead">
     <a class="mark" href="/">prudie<span>.dev</span></a>
-    <nav>
+    <nav id="site-nav">
       <a href="#offers">Pricing</a>
       <a href="#cases">Case studies</a>
       <a href="#about">About</a>
       <a href="#faq">FAQ</a>
       <a href="#book">Book a call</a>
     </nav>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
   </div>
 </header>
 
@@ -675,16 +691,16 @@
           <span class="quote-avatar" style="background:var(--blue)" aria-hidden="true">MR</span>
           <div class="quote-byline"><b>Melinda Radley</b><span>Real Estate Agent</span></div>
         </div>
-        <p class="quote-headline">10 hours a week, back in my schedule</p>
-        <blockquote>Before, I was manually following up with every open house lead, replying to cold emails one by one, and sending application packets by hand. Grace automated all 3 on n8n, synced with my CRM, so new leads get a response right away. I got 10 hours back every week, and the price was fixed from the start.</blockquote>
+        <p class="quote-headline">I'm not chasing leads anymore</p>
+        <blockquote>Open house leads used to sit in my inbox until I had a free hour to get to them, and by then some had already called another agent. Grace set up a system on n8n that responds the moment someone comes in and keeps my CRM updated without me touching it. I still follow up personally, I just don't have to be the one who remembers to start.</blockquote>
       </article>
       <article class="quote">
         <div class="quote-head">
           <span class="quote-avatar" style="background:var(--violet)" aria-hidden="true">CJ</span>
           <div class="quote-byline"><b>Charles Jones</b><span>Senior Director, Multifamily Housing Finance</span></div>
         </div>
-        <p class="quote-headline">Loan responses: hours to minutes</p>
-        <blockquote>Our loan and application responses went from hours to minutes, and doc-chasing follow-ups dropped by 25% to 40%. Rent roll and T12 intake now saves my analysts 2 to 4 hours a deal, and they still review every number. Stalled files get flagged within 1 to 2 days instead of the weekly pipeline review, and we catch compliance dates we used to miss. It runs on n8n, fixed price, and keeps running without her in the loop.</blockquote>
+        <p class="quote-headline">Our team stopped chasing documents</p>
+        <blockquote>Loan files would stall for days waiting on a missing document, and we usually only caught it at the weekly pipeline review. Now the system flags a stalled file right away, and rent roll and T12 intake comes in mostly ready instead of something my analysts have to assemble by hand. They still check every number themselves, nothing posts without someone signing off. It's been a refreshingly simple vendor relationship: fixed price, clear scope, and it keeps running without Grace needing to be involved.</blockquote>
       </article>
     </div>
   </section>
@@ -974,6 +990,23 @@
     el.href = 'mailto:' + addr;
     el.textContent = addr;
   });
+
+  var masthead = document.querySelector('.masthead');
+  var navToggle = document.querySelector('.nav-toggle');
+  if(masthead && navToggle){
+    navToggle.addEventListener('click', function(){
+      var open = masthead.classList.toggle('is-nav-open');
+      navToggle.setAttribute('aria-expanded', String(open));
+      navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    masthead.querySelectorAll('nav a').forEach(function(a){
+      a.addEventListener('click', function(){
+        masthead.classList.remove('is-nav-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Open menu');
+      });
+    });
+  }
 
   var header = document.querySelector('.site-header');
   var progress = document.querySelector('.scroll-progress');
